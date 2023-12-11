@@ -35,7 +35,8 @@ public class BankController extends Exception{
 
         try{
             CustomerModel isCustomer = customerServices.findCustomerById(customerId);
-            if ( isCustomer == null )
+            BankModel isBankDetail = bankServices.getBankDetails(customerId);
+            if ( isCustomer == null || isBankDetail != null )
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
             BankModel bank = new BankModel();
@@ -43,6 +44,7 @@ public class BankController extends Exception{
             bank.setBankAccountNo(bankDetail.getBankAccountNo());
             bank.setIFSC(bankDetail.getIFSC());
             bank.setBankBranch(bankDetail.getBankBranch());
+            bank.setBankName(bankDetail.getBankName());
             bank.setAccountHolderName(bankDetail.getAccountHolderName());
             bank.setAccountHolderPhone(bankDetail.getAccountHolderPhone());
 
@@ -77,6 +79,9 @@ public class BankController extends Exception{
 
         if ( updatedBankDetail.getIFSC() != null )
             bankDetailExist.setIFSC(updatedBankDetail.getIFSC());
+
+        if ( updatedBankDetail.getBankName() != null )
+            bankDetailExist.setBankName(updatedBankDetail.getBankName());
 
         if ( updatedBankDetail.getAccountHolderName() != null )
             bankDetailExist.setAccountHolderName(updatedBankDetail.getAccountHolderName());

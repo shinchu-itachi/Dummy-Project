@@ -29,6 +29,9 @@ public class BankModel {
     private String BankBranch;
 
     @NotBlank
+    private String BankName;
+
+    @NotBlank
     private String AccountHolderName;
 
     @NotBlank
